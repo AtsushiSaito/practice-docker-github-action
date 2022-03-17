@@ -7,7 +7,7 @@ jobs:
     strategy:
       matrix:
           arch: [amd64, arm64]
-          os: ["ubuntu:18.04", "ubuntu:20.04"]
+          os: [bionic, focal, latest]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -25,13 +25,13 @@ jobs:
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
       - run: echo "OS=${{ matrix.os }}, ARCHITECTURE=${{ matrix.arch }}"
-
+      
       - name: Build and Push
         uses: docker/build-push-action@v2
         with:
-          build-args: BASE_IMAGE=${{ matrix.os }}
+          build-args: BASE_IMAGE=ubuntu:${{ matrix.os }}
           context: .
           file: Dockerfile.${{ matrix.arch }}
           platforms: linux/${{ matrix.arch }}
           push: true
-          tags: atsushisaito/practice-docker-github-action:latest-${{ matrix.arch }}
+          tags: atsushisaito/practice-docker-github-action:${{ matrix.os }}-${{ matrix.arch }}
