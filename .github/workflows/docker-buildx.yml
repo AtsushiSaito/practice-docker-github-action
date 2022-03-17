@@ -1,4 +1,5 @@
 name: Docker BuildX
+
 on: push
 
 jobs:
@@ -6,7 +7,7 @@ jobs:
     strategy:
       matrix:
           arch: [amd64, arm64]
-          os: [ubuntu:18.04, ubuntu:20.04]
+          os: ["ubuntu:18.04", "ubuntu:20.04"]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
