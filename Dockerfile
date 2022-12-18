@@ -9,3 +9,10 @@ RUN apt update \
     && apt autoclean -y \
     && apt autoremove -y \
     && rm -rf /var/lib/apt/lists/*
+
+RUN apt update \
+    && apt install -y --no-install-recommends --allow-unauthenticated \
+        zsh \
+    && apt autoclean -y \
+    && apt autoremove -y \
+    && rm -rf /var/lib/apt/lists/*
